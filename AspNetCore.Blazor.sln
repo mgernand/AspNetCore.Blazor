@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".items", ".items", "{48E74007-0A2D-4CC1-80B5-61F00FAB0B8B}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{B0F01326-C53A-4B98-B8AA-BD14A234CE4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A906B215-EDE1-42EC-B65C-8F3F4DAF312B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CFA75348-C05E-4717-9B02-E7728D586FEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Blazor", "src\AspNetCore.Blazor\AspNetCore.Blazor.csproj", "{591A3608-9F43-4A55-A1FF-032B387F0FA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Blazor.Wasm.Demo", "samples\AspNetCore.Blazor.Wasm.Demo\AspNetCore.Blazor.Wasm.Demo.csproj", "{1E529E29-2915-4CC6-ABD1-2910908E75E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Blazor.Server.Demo", "samples\AspNetCore.Blazor.Server.Demo\AspNetCore.Blazor.Server.Demo.csproj", "{D178BFB5-4700-4C23-BF5B-241930308D01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{591A3608-9F43-4A55-A1FF-032B387F0FA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591A3608-9F43-4A55-A1FF-032B387F0FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591A3608-9F43-4A55-A1FF-032B387F0FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591A3608-9F43-4A55-A1FF-032B387F0FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E529E29-2915-4CC6-ABD1-2910908E75E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E529E29-2915-4CC6-ABD1-2910908E75E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E529E29-2915-4CC6-ABD1-2910908E75E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E529E29-2915-4CC6-ABD1-2910908E75E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D178BFB5-4700-4C23-BF5B-241930308D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D178BFB5-4700-4C23-BF5B-241930308D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D178BFB5-4700-4C23-BF5B-241930308D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D178BFB5-4700-4C23-BF5B-241930308D01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{591A3608-9F43-4A55-A1FF-032B387F0FA3} = {A906B215-EDE1-42EC-B65C-8F3F4DAF312B}
+		{1E529E29-2915-4CC6-ABD1-2910908E75E3} = {B0F01326-C53A-4B98-B8AA-BD14A234CE4D}
+		{D178BFB5-4700-4C23-BF5B-241930308D01} = {B0F01326-C53A-4B98-B8AA-BD14A234CE4D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F428559-6BED-4F2D-BB4B-1E31C53DAFCD}
+	EndGlobalSection
+EndGlobal
