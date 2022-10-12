@@ -1,7 +1,7 @@
 ﻿namespace AspNetCore.Blazor
 {
+	using System;
 	using AspNetCore.Blazor.DependencyInjection;
-	using Fluxera.Guards;
 	using JetBrains.Annotations;
 	using Microsoft.AspNetCore.Components;
 	using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +21,10 @@
 		/// <returns></returns>
 		public static IServiceCollection AddComponentActivator(this IServiceCollection services)
 		{
-			Guard.Against.Null(services);
+			if(services is null)
+			{
+				throw new ArgumentNullException(nameof(services));
+			}
 
 			services.AddTransient<IComponentActivator, ServiceProviderComponentActivator>();
 
@@ -39,7 +42,10 @@
 		public static IServiceCollection AddComponent<T>(this IServiceCollection services)
 			where T : class, IComponent
 		{
-			Guard.Against.Null(services);
+			if(services is null)
+			{
+				throw new ArgumentNullException(nameof(services));
+			}
 
 			services.AddTransient<T>();
 

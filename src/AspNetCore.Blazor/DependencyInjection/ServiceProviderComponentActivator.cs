@@ -1,7 +1,6 @@
 ﻿namespace AspNetCore.Blazor.DependencyInjection
 {
 	using System;
-	using Fluxera.Guards;
 	using JetBrains.Annotations;
 	using Microsoft.AspNetCore.Components;
 
@@ -25,11 +24,17 @@
 		/// <inheritdoc />
 		public IComponent CreateInstance(Type componentType)
 		{
-			Guard.Against.Null(componentType);
-			Guard.Against.NotComponentType(componentType);
+			if(componentType is null)
+			{
+				throw new ArgumentNullException(nameof(componentType));
+			}
 
-			object instance =
-				this.serviceProvider.GetService(componentType) ?? Activator.CreateInstance(componentType);
+			if(!typeof(IComponent).IsAssignableFrom(componentType))
+			{
+				throw new ArgumentException($"The type {componentType.FullName} does not implement the {nameof(IComponent)} interface.", nameof(componentType));
+			}
+
+			object instance = this.serviceProvider.GetService(componentType) ?? Activator.CreateInstance(componentType);
 
 			return (IComponent)instance;
 		}

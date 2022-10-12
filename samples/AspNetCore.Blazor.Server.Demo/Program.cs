@@ -1,6 +1,9 @@
 using AspNetCore.Blazor;
 using AspNetCore.Blazor.Server.Demo.Data;
 using AspNetCore.Blazor.Server.Demo.Pages;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
