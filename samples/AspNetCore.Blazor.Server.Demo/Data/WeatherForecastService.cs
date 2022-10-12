@@ -1,11 +1,15 @@
 namespace AspNetCore.Blazor.Server.Demo.Data
 {
+	using System;
+	using System.Linq;
+	using System.Threading.Tasks;
+
 	public class WeatherForecastService
 	{
-		private static readonly string[] Summaries = new[]
+		private static readonly string[] Summaries =
 		{
-		"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-	};
+			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+		};
 
 		public Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
 		{

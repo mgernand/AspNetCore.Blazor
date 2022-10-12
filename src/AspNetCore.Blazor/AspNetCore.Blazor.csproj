@@ -12,15 +12,15 @@
 		<PackageId>MadEyeMatt.$(AssemblyName)</PackageId>
 		<IncludeSymbols>false</IncludeSymbols>
 		<Copyright>Copyright © 2022 Matthias Gernand. All rights reserved.</Copyright>
-		<Version>6.0.1</Version>
-		<AssemblyVersion>6.0.1</AssemblyVersion>
-		<FileVersion>6.0.1</FileVersion>
+		<Version>6.1.0</Version>
+		<AssemblyVersion>6.1.0</AssemblyVersion>
+		<FileVersion>6.1.0</FileVersion>
 		<Authors>Matthias Gernand</Authors>
 		<Description>A library that provides some extensions for ASP.NET Core Blazor.</Description>
 		<NeutralLanguage>en</NeutralLanguage>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageProjectUrl>https://github.com/mgernand/AspNetCore.Authorization.Permissions</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/mgernand/AspNetCore.Authorization.Permissions</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/mgernand/AspNetCore.Authorization.Blazor</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/mgernand/AspNetCore.Authorization.Blazor</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>aspnetcore;blazor</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -40,14 +40,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Fluxera.Guards" Version="6.1.0" />
 	  <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="DependencyInjection\" />
-	  <Folder Include="Components\" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
 	</ItemGroup>
 
 </Project>
