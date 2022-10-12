@@ -19,8 +19,8 @@
 		<Description>A library that provides some extensions for ASP.NET Core Blazor.</Description>
 		<NeutralLanguage>en</NeutralLanguage>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageProjectUrl>https://github.com/mgernand/AspNetCore.Authorization.Permissions</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/mgernand/AspNetCore.Authorization.Permissions</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/mgernand/AspNetCore.Authorization.Blazor</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/mgernand/AspNetCore.Authorization.Blazor</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>aspnetcore;blazor</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
