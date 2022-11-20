@@ -1,8 +1,8 @@
-namespace AspNetCore.Blazor.Server.Demo.Data
+namespace MadEyeMatt.AspNetCore.Blazor.Server.Demo.Data
 {
-	using System;
+    using System;
 
-	public class WeatherForecast
+    public class WeatherForecast
 	{
 		public DateTime Date { get; set; }
 

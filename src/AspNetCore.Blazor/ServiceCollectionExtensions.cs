@@ -1,12 +1,11 @@
-﻿namespace AspNetCore.Blazor
+﻿namespace MadEyeMatt.AspNetCore.Blazor
 {
-	using System;
-	using AspNetCore.Blazor.DependencyInjection;
-	using JetBrains.Annotations;
-	using Microsoft.AspNetCore.Components;
-	using Microsoft.Extensions.DependencyInjection;
+    using System;
+    using JetBrains.Annotations;
+    using Microsoft.AspNetCore.Components;
+    using Microsoft.Extensions.DependencyInjection;
 
-	/// <summary>
+    /// <summary>
 	///     Extension methods for the <see cref="IServiceCollection" /> type.
 	/// </summary>
 	[PublicAPI]
@@ -26,7 +25,7 @@
 				throw new ArgumentNullException(nameof(services));
 			}
 
-			services.AddTransient<IComponentActivator, ServiceProviderComponentActivator>();
+			services.AddTransient<IComponentActivator, MadEyeMatt.AspNetCore.Blazor.DependencyInjection.ServiceProviderComponentActivator>();
 
 			return services;
 		}

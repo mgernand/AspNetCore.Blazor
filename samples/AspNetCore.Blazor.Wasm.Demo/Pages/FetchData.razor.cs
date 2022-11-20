@@ -1,11 +1,11 @@
-﻿namespace AspNetCore.Blazor.Wasm.Demo.Pages
+﻿namespace MadEyeMatt.AspNetCore.Blazor.Wasm.Demo.Pages
 {
-	using System;
-	using System.Net.Http;
-	using System.Net.Http.Json;
-	using System.Threading.Tasks;
+    using System;
+    using System.Net.Http;
+    using System.Net.Http.Json;
+    using System.Threading.Tasks;
 
-	public partial class FetchData
+    public partial class FetchData
 	{
 		private readonly HttpClient httpClient;
 		private WeatherForecast[] forecasts;
