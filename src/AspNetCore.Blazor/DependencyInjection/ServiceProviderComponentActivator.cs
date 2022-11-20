@@ -1,10 +1,10 @@
-﻿namespace AspNetCore.Blazor.DependencyInjection
+﻿namespace MadEyeMatt.AspNetCore.Blazor.DependencyInjection
 {
-	using System;
-	using JetBrains.Annotations;
-	using Microsoft.AspNetCore.Components;
+    using System;
+    using JetBrains.Annotations;
+    using Microsoft.AspNetCore.Components;
 
-	/// <summary>
+    /// <summary>
 	///     This <see cref="IComponentActivator" /> implementation enables
 	///     constructor injection in components.
 	/// </summary>

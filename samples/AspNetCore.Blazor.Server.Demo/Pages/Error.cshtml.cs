@@ -1,11 +1,11 @@
-﻿namespace AspNetCore.Blazor.Server.Demo.Pages
+﻿namespace MadEyeMatt.AspNetCore.Blazor.Server.Demo.Pages
 {
-	using System.Diagnostics;
-	using Microsoft.AspNetCore.Mvc;
-	using Microsoft.AspNetCore.Mvc.RazorPages;
-	using Microsoft.Extensions.Logging;
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Logging;
 
-	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 	[IgnoreAntiforgeryToken]
 	public class ErrorModel : PageModel
 	{

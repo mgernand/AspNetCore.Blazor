@@ -1,15 +1,14 @@
-﻿namespace AspNetCore.Blazor.Server.Demo.Pages
+﻿namespace MadEyeMatt.AspNetCore.Blazor.Server.Demo.Pages
 {
-	using System;
-	using System.Threading.Tasks;
-	using AspNetCore.Blazor.Server.Demo.Data;
+    using System;
+    using System.Threading.Tasks;
 
-	public partial class FetchData
+    public partial class FetchData
 	{
-		private readonly WeatherForecastService weatherForecastService;
-		private WeatherForecast[] forecasts;
+		private readonly MadEyeMatt.AspNetCore.Blazor.Server.Demo.Data.WeatherForecastService weatherForecastService;
+		private MadEyeMatt.AspNetCore.Blazor.Server.Demo.Data.WeatherForecast[] forecasts;
 
-		public FetchData(WeatherForecastService weatherForecastService)
+		public FetchData(MadEyeMatt.AspNetCore.Blazor.Server.Demo.Data.WeatherForecastService weatherForecastService)
 		{
 			this.weatherForecastService = weatherForecastService;
 		}

@@ -1,6 +1,4 @@
-using AspNetCore.Blazor;
-using AspNetCore.Blazor.Server.Demo.Data;
-using AspNetCore.Blazor.Server.Demo.Pages;
+using MadEyeMatt.AspNetCore.Blazor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,9 +8,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<MadEyeMatt.AspNetCore.Blazor.Server.Demo.Data.WeatherForecastService>();
 builder.Services.AddComponentActivator();
-builder.Services.AddComponent<FetchData>();
+builder.Services.AddComponent<MadEyeMatt.AspNetCore.Blazor.Server.Demo.Pages.FetchData>();
 
 WebApplication app = builder.Build();
 

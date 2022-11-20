@@ -1,10 +1,10 @@
-namespace AspNetCore.Blazor.Server.Demo.Data
+namespace MadEyeMatt.AspNetCore.Blazor.Server.Demo.Data
 {
-	using System;
-	using System.Linq;
-	using System.Threading.Tasks;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
 
-	public class WeatherForecastService
+    public class WeatherForecastService
 	{
 		private static readonly string[] Summaries =
 		{
