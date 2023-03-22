@@ -2,7 +2,8 @@
 {
     using System;
     using JetBrains.Annotations;
-    using Microsoft.AspNetCore.Components;
+	using MadEyeMatt.AspNetCore.Blazor.DependencyInjection;
+	using Microsoft.AspNetCore.Components;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -25,7 +26,7 @@
 				throw new ArgumentNullException(nameof(services));
 			}
 
-			services.AddTransient<IComponentActivator, MadEyeMatt.AspNetCore.Blazor.DependencyInjection.ServiceProviderComponentActivator>();
+			services.AddTransient<IComponentActivator, ServiceProviderComponentActivator>();
 
 			return services;
 		}
