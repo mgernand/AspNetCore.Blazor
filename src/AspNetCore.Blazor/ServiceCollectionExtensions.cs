@@ -1,15 +1,19 @@
 ﻿namespace MadEyeMatt.AspNetCore.Blazor
 {
     using System;
-    using JetBrains.Annotations;
-	using MadEyeMatt.AspNetCore.Blazor.DependencyInjection;
+	using System.Net.Http;
+	using JetBrains.Annotations;
+    using MadEyeMatt.AspNetCore.Blazor.Authorization;
+    using MadEyeMatt.AspNetCore.Blazor.DependencyInjection;
+    using MadEyeMatt.AspNetCore.Blazor.Extensions;
 	using Microsoft.AspNetCore.Components;
+    using Microsoft.AspNetCore.Components.Authorization;
     using Microsoft.Extensions.DependencyInjection;
 
-    /// <summary>
-	///     Extension methods for the <see cref="IServiceCollection" /> type.
-	/// </summary>
-	[PublicAPI]
+	/// <summary>
+    ///     Extension methods for the <see cref="IServiceCollection" /> type.
+    /// </summary>
+    [PublicAPI]
 	public static class ServiceCollectionExtensions
 	{
 		/// <summary>
@@ -50,6 +54,50 @@
 			services.AddTransient<T>();
 
 			return services;
+		}
+
+		/// <summary>
+		///     Adds the <see cref="ICookieService" /> to the service collection.
+		/// </summary>
+		/// <param name="services"></param>
+		/// <returns></returns>
+		public static IServiceCollection AddCookieService(this IServiceCollection services)
+		{
+			return services.AddScoped<ICookieService, CookieService>();
+		}
+
+		/// <summary>
+		///     Adds a <see cref="RevalidatingAuthenticationStateProviderBase" /> implementation as the
+		///     <see cref="AuthenticationStateProvider" /> to use.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="services"></param>
+		/// <param name="optionsAction"></param>
+		/// <returns></returns>
+		public static IServiceCollection AddAuthenticationStateProvider<T>(this IServiceCollection services, Action<AuthenticationStateProviderOptions> optionsAction = null)
+			where T : RevalidatingAuthenticationStateProviderBase
+		{
+			if(optionsAction is not null)
+			{
+				services.Configure(optionsAction);
+			}
+
+			services.AddScoped<AuthenticationStateProvider, T>();
+			services.AddScoped(serviceProvider => (IAuthenticationService)serviceProvider.GetRequiredService<AuthenticationStateProvider>());
+
+			return services;
+		}
+
+		///  <summary>
+		/// 		Adds a named <see cref="HttpClient"/> to ser service collection.
+		///  </summary>
+		///  <param name="services"></param>
+		///  <param name="name"></param>
+		///  <param name="baseAddress"></param>
+		///  <returns></returns>
+		public static IHttpClientBuilder AddHttpClient(this IServiceCollection services, string name, string baseAddress)
+		{
+			return services.AddHttpClient(name, client => client.BaseAddress = new Uri(baseAddress));
 		}
 	}
 }
