@@ -22,7 +22,7 @@
 		/// <returns></returns>
 		public static IHttpClientBuilder AddAntiForgeryHandler(this IHttpClientBuilder builder)
 		{
-			builder.Services.TryAddScoped<AntiForgeryHandler>();
+			builder.Services.TryAddTransient<AntiForgeryHandler>();
 
 			return builder.AddHttpMessageHandler<AntiForgeryHandler>();
 		}
@@ -35,7 +35,7 @@
 		///  <returns></returns>
 		public static IHttpClientBuilder AddAuthorizedHandler(this IHttpClientBuilder builder, PathString loginPageRoute)
 		{
-			builder.Services.TryAddScoped(serviceProvider =>
+			builder.Services.TryAddTransient(serviceProvider =>
 			{
 				AuthenticationStateProvider authenticationStateProvider = serviceProvider.GetRequiredService<AuthenticationStateProvider>();
 				NavigationManager navigationManager = serviceProvider.GetRequiredService<NavigationManager>();
