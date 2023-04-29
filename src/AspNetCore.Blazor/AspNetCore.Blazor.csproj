@@ -14,9 +14,9 @@
 		<RootNamespace>MadEyeMatt.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
 		<IncludeSymbols>false</IncludeSymbols>
 		<Copyright>Copyright © 2022-2023 Matthias Gernand. All rights reserved.</Copyright>
-		<Version>7.4.0</Version>
-		<AssemblyVersion>7.4.0</AssemblyVersion>
-		<FileVersion>7.4.0</FileVersion>
+		<Version>7.4.1</Version>
+		<AssemblyVersion>7.4.1</AssemblyVersion>
+		<FileVersion>7.4.1</FileVersion>
 		<Authors>Matthias Gernand</Authors>
 		<Description>A library that provides some extensions for ASP.NET Core Blazor.</Description>
 		<NeutralLanguage>en</NeutralLanguage>
