@@ -2,6 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See: https://github.com/dotnet/aspnetcore/blob/v8.0.0/src/Http/Http.Abstractions/src/QueryString.cs
 
+#if NET8_0_OR_GREATER
+
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -291,3 +295,5 @@ public readonly struct QueryString : IEquatable<QueryString>
         }
     }
 }
+
+#endif
