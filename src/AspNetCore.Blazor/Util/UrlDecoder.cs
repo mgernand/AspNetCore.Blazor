@@ -2,6 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See: https://github.com/dotnet/aspnetcore/blob/v8.0.0/src/Shared/UrlDecoder/UrlDecoder.cs
 
+#if NET8_0_OR_GREATER
+
+#nullable enable
+
 using System;
 using System.Runtime.CompilerServices;
 
@@ -625,3 +629,5 @@ internal sealed class UrlDecoder
              -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1  // 255
     };
 }
+
+#endif
