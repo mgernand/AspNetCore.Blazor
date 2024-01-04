@@ -22,6 +22,9 @@
 		/// <returns></returns>
 		public static IHttpClientBuilder AddAntiForgeryHandler(this IHttpClientBuilder builder)
 		{
+			// Always register your custom delegating handlers with transient lifetime when you are
+			// using the ASP.NET core HTTP client factory.
+			// https://andrewlock.net/understanding-scopes-with-ihttpclientfactory-message-handlers/
 			builder.Services.TryAddTransient<AntiForgeryHandler>();
 
 			return builder.AddHttpMessageHandler<AntiForgeryHandler>();
@@ -35,6 +38,9 @@
 		///  <returns></returns>
 		public static IHttpClientBuilder AddAuthorizedHandler(this IHttpClientBuilder builder, PathString loginPageRoute)
 		{
+			// Always register your custom delegating handlers with transient lifetime when you are
+			// using the ASP.NET core HTTP client factory.
+			// https://andrewlock.net/understanding-scopes-with-ihttpclientfactory-message-handlers/
 			builder.Services.TryAddTransient(serviceProvider =>
 			{
 				AuthenticationStateProvider authenticationStateProvider = serviceProvider.GetRequiredService<AuthenticationStateProvider>();
