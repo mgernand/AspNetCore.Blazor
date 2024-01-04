@@ -16,11 +16,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A906B215-EDE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CFA75348-C05E-4717-9B02-E7728D586FEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Blazor", "src\AspNetCore.Blazor\AspNetCore.Blazor.csproj", "{591A3608-9F43-4A55-A1FF-032B387F0FA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Blazor", "src\AspNetCore.Blazor\AspNetCore.Blazor.csproj", "{591A3608-9F43-4A55-A1FF-032B387F0FA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Blazor.Wasm.Demo", "samples\AspNetCore.Blazor.Wasm.Demo\AspNetCore.Blazor.Wasm.Demo.csproj", "{1E529E29-2915-4CC6-ABD1-2910908E75E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Blazor.Wasm.Demo", "samples\AspNetCore.Blazor.Wasm.Demo\AspNetCore.Blazor.Wasm.Demo.csproj", "{1E529E29-2915-4CC6-ABD1-2910908E75E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Blazor.Server.Demo", "samples\AspNetCore.Blazor.Server.Demo\AspNetCore.Blazor.Server.Demo.csproj", "{D178BFB5-4700-4C23-BF5B-241930308D01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Blazor.Server.Demo", "samples\AspNetCore.Blazor.Server.Demo\AspNetCore.Blazor.Server.Demo.csproj", "{D178BFB5-4700-4C23-BF5B-241930308D01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Blazor.UnitTests", "tests\AspNetCore.Blazor.UnitTests\AspNetCore.Blazor.UnitTests.csproj", "{2065B0D6-C93B-4833-B180-77DCC170C02B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{D178BFB5-4700-4C23-BF5B-241930308D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D178BFB5-4700-4C23-BF5B-241930308D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D178BFB5-4700-4C23-BF5B-241930308D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2065B0D6-C93B-4833-B180-77DCC170C02B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2065B0D6-C93B-4833-B180-77DCC170C02B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2065B0D6-C93B-4833-B180-77DCC170C02B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2065B0D6-C93B-4833-B180-77DCC170C02B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{591A3608-9F43-4A55-A1FF-032B387F0FA3} = {A906B215-EDE1-42EC-B65C-8F3F4DAF312B}
 		{1E529E29-2915-4CC6-ABD1-2910908E75E3} = {B0F01326-C53A-4B98-B8AA-BD14A234CE4D}
 		{D178BFB5-4700-4C23-BF5B-241930308D01} = {B0F01326-C53A-4B98-B8AA-BD14A234CE4D}
+		{2065B0D6-C93B-4833-B180-77DCC170C02B} = {CFA75348-C05E-4717-9B02-E7728D586FEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F428559-6BED-4F2D-BB4B-1E31C53DAFCD}
