@@ -13,6 +13,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{B0F01326-C53A-4B98-B8AA-BD14A234CE4D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A906B215-EDE1-42EC-B65C-8F3F4DAF312B}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CFA75348-C05E-4717-9B02-E7728D586FEF}"
 EndProject
@@ -22,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Blazor.Wasm.Demo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Blazor.Server.Demo", "samples\AspNetCore.Blazor.Server.Demo\AspNetCore.Blazor.Server.Demo.csproj", "{D178BFB5-4700-4C23-BF5B-241930308D01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Blazor.UnitTests", "tests\AspNetCore.Blazor.UnitTests\AspNetCore.Blazor.UnitTests.csproj", "{2065B0D6-C93B-4833-B180-77DCC170C02B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Blazor.UnitTests", "tests\AspNetCore.Blazor.UnitTests\AspNetCore.Blazor.UnitTests.csproj", "{2065B0D6-C93B-4833-B180-77DCC170C02B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
