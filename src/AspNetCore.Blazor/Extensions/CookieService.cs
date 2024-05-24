@@ -25,7 +25,7 @@ namespace MadEyeMatt.AspNetCore.Blazor.Extensions
 
             // Invokes the specified JavaScript function and returns the result as a string.
             // In this case, the function is the 'eval' function, which evaluates a JavaScript expression and returns its result.
-            return await jsRuntime.InvokeAsync<string>("eval", cancellationToken, jsExpression);
+            return await this.jsRuntime.InvokeAsync<string>("eval", cancellationToken, jsExpression);
         }
     }
 }
