@@ -12,6 +12,8 @@ using System.Runtime.CompilerServices;
 // ReSharper disable CheckNamespace
 namespace Microsoft.AspNetCore.Internal;
 
+using System.Text;
+
 internal sealed class UrlDecoder
 {
     /// <summary>
@@ -48,10 +50,10 @@ internal sealed class UrlDecoder
     public static int DecodeInPlace(Span<byte> buffer, bool isFormEncoding)
     {
         // the slot to read the input
-        var sourceIndex = 0;
+        int sourceIndex = 0;
 
         // the slot to write the unescaped byte
-        var destinationIndex = 0;
+        int destinationIndex = 0;
 
         while (true)
         {
@@ -67,7 +69,7 @@ internal sealed class UrlDecoder
             }
             else if (buffer[sourceIndex] == '%')
             {
-                var decodeIndex = sourceIndex;
+                int decodeIndex = sourceIndex;
 
                 // If decoding process succeeds, the writer iterator will be moved
                 // to the next write-ready location. On the other hand if the scanned
@@ -103,7 +105,7 @@ internal sealed class UrlDecoder
     {
         // preserves the original head. if the percent-encodings cannot be interpreted as sequence of UTF-8 octets,
         // bytes from this till the last scanned one will be copied to the memory pointed by writer.
-        var byte1 = UnescapePercentEncoding(ref sourceIndex, buffer, isFormEncoding);
+        int byte1 = UnescapePercentEncoding(ref sourceIndex, buffer, isFormEncoding);
         if (byte1 == -1)
         {
             return false;
@@ -154,7 +156,7 @@ internal sealed class UrlDecoder
             return false;
         }
 
-        var remainingBytes = byteCount - 1;
+        int remainingBytes = byteCount - 1;
         while (remainingBytes > 0)
         {
             // read following three chars
@@ -163,8 +165,8 @@ internal sealed class UrlDecoder
                 return false;
             }
 
-            var nextSourceIndex = sourceIndex;
-            var nextByte = UnescapePercentEncoding(ref nextSourceIndex, buffer, isFormEncoding);
+            int nextSourceIndex = sourceIndex;
+            int nextByte = UnescapePercentEncoding(ref nextSourceIndex, buffer, isFormEncoding);
             if (nextByte == -1)
             {
                 return false;
@@ -272,15 +274,15 @@ internal sealed class UrlDecoder
             return -1;
         }
 
-        var probe = scan;
+        int probe = scan;
 
-        var value1 = ReadHex(ref probe, buffer);
+        int value1 = ReadHex(ref probe, buffer);
         if (value1 == -1)
         {
             return -1;
         }
 
-        var value2 = ReadHex(ref probe, buffer);
+        int value2 = ReadHex(ref probe, buffer);
         if (value2 == -1)
         {
             return -1;
@@ -311,10 +313,10 @@ internal sealed class UrlDecoder
             return -1;
         }
 
-        var value = buffer[scan++];
-        var isHex = ((value >= '0') && (value <= '9')) ||
-                     ((value >= 'A') && (value <= 'F')) ||
-                     ((value >= 'a') && (value <= 'f'));
+        byte value = buffer[scan++];
+        bool isHex = ((value >= '0') && (value <= '9')) ||
+					 ((value >= 'A') && (value <= 'F')) ||
+					 ((value >= 'a') && (value <= 'f'));
 
         if (!isHex)
         {
@@ -392,10 +394,10 @@ internal sealed class UrlDecoder
         }
 
         // the slot to read the input
-        var sourceIndex = position;
+        int sourceIndex = position;
 
         // the slot to write the unescaped char
-        var destinationIndex = position;
+        int destinationIndex = position;
 
         while (true)
         {
@@ -406,7 +408,7 @@ internal sealed class UrlDecoder
 
             if (buffer[sourceIndex] == '%')
             {
-                var decodeIndex = sourceIndex;
+                int decodeIndex = sourceIndex;
 
                 // If decoding process succeeds, the writer iterator will be moved
                 // to the next write-ready location. On the other hand if the scanned
@@ -441,7 +443,7 @@ internal sealed class UrlDecoder
     {
         // preserves the original head. if the percent-encodings cannot be interpreted as sequence of UTF-8 octets,
         // chars from this till the last scanned one will be copied to the memory pointed by writer.
-        var codeUnit1 = UnescapePercentEncoding(ref sourceIndex, buffer);
+        int codeUnit1 = UnescapePercentEncoding(ref sourceIndex, buffer);
         if (codeUnit1 == -1)
         {
             return false;
@@ -490,7 +492,7 @@ internal sealed class UrlDecoder
             return false;
         }
 
-        var remainingCodeUnits = codeUnitCount - 1;
+        int remainingCodeUnits = codeUnitCount - 1;
         while (remainingCodeUnits > 0)
         {
             // read following three code units
@@ -499,8 +501,8 @@ internal sealed class UrlDecoder
                 return false;
             }
 
-            var nextSourceIndex = sourceIndex;
-            var nextCodeUnit = UnescapePercentEncoding(ref nextSourceIndex, buffer);
+            int nextSourceIndex = sourceIndex;
+            int nextCodeUnit = UnescapePercentEncoding(ref nextSourceIndex, buffer);
             if (nextCodeUnit == -1)
             {
                 return false;
@@ -527,7 +529,7 @@ internal sealed class UrlDecoder
             return false;
         }
 
-        if (!System.Text.Rune.TryCreate(currentDecodeBits, out var rune) || !rune.TryEncodeToUtf16(buffer.Slice(destinationIndex), out var charsWritten))
+        if (!System.Text.Rune.TryCreate(currentDecodeBits, out Rune rune) || !rune.TryEncodeToUtf16(buffer.Slice(destinationIndex), out int charsWritten))
         {
             // Reasons for this failure could be:
             // Value is in the range of 0xD800-0xDFFF UTF-16 surrogates that are not allowed in UTF-8
@@ -566,7 +568,7 @@ internal sealed class UrlDecoder
             return -1;
         }
 
-        var probe = scan;
+        int probe = scan;
 
         int firstNibble = ReadHex(ref probe, buffer);
         int secondNibble = ReadHex(ref probe, buffer);

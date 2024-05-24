@@ -1,4 +1,5 @@
 ﻿@page "/fetchdata"
+@using MadEyeMatt.AspNetCore.Blazor.Server.Demo.Data
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -22,7 +23,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (WeatherForecast forecast in forecasts)
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>

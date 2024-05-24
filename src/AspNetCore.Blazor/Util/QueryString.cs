@@ -39,7 +39,8 @@ public readonly struct QueryString : IEquatable<QueryString>
         {
             throw new ArgumentException("The leading '?' must be included for a non-empty query.", nameof(value));
         }
-        Value = value;
+
+		this.Value = value;
     }
 
     /// <summary>
@@ -51,7 +52,7 @@ public readonly struct QueryString : IEquatable<QueryString>
     /// True if the query string is not empty
     /// </summary>
     [MemberNotNullWhen(true, nameof(Value))]
-    public bool HasValue => !string.IsNullOrEmpty(Value);
+    public bool HasValue => !string.IsNullOrEmpty(this.Value);
 
     /// <summary>
     /// Provides the query string escaped in a way which is correct for combining into the URI representation.
@@ -61,7 +62,7 @@ public readonly struct QueryString : IEquatable<QueryString>
     /// <returns>The query string value</returns>
     public override string ToString()
     {
-        return ToUriComponent();
+        return this.ToUriComponent();
     }
 
     /// <summary>
@@ -73,7 +74,7 @@ public readonly struct QueryString : IEquatable<QueryString>
     public string ToUriComponent()
     {
         // Escape things properly so System.Uri doesn't mis-interpret the data.
-        return HasValue ? Value.Replace("#", "%23") : string.Empty;
+        return this.HasValue ? this.Value.Replace("#", "%23") : string.Empty;
     }
 
     /// <summary>
@@ -132,9 +133,9 @@ public readonly struct QueryString : IEquatable<QueryString>
     /// <returns>The resulting QueryString</returns>
     public static QueryString Create(IEnumerable<KeyValuePair<string, string>> parameters)
     {
-        var builder = new StringBuilder();
-        var first = true;
-        foreach (var pair in parameters)
+        StringBuilder? builder = new StringBuilder();
+        bool first = true;
+        foreach (KeyValuePair<string, string> pair in parameters)
         {
             AppendKeyValuePair(builder, pair.Key, pair.Value, first);
             first = false;
@@ -150,10 +151,10 @@ public readonly struct QueryString : IEquatable<QueryString>
     /// <returns>The resulting QueryString</returns>
     public static QueryString Create(IEnumerable<KeyValuePair<string, StringValues>> parameters)
     {
-        var builder = new StringBuilder();
-        var first = true;
+        StringBuilder? builder = new StringBuilder();
+        bool first = true;
 
-        foreach (var pair in parameters)
+        foreach (KeyValuePair<string, StringValues> pair in parameters)
         {
             // If nothing in this pair.Values, append null value and continue
             if (StringValues.IsNullOrEmpty(pair.Value))
@@ -163,7 +164,7 @@ public readonly struct QueryString : IEquatable<QueryString>
                 continue;
             }
             // Otherwise, loop through values in pair.Value
-            foreach (var value in pair.Value)
+            foreach (string? value in pair.Value)
             {
                 AppendKeyValuePair(builder, pair.Key, value, first);
                 first = false;
@@ -180,7 +181,7 @@ public readonly struct QueryString : IEquatable<QueryString>
     /// <returns>The concatenated <see cref="QueryString"/>.</returns>
     public QueryString Add(QueryString other)
     {
-        if (!HasValue || Value.Equals("?", StringComparison.Ordinal))
+        if (!this.HasValue || this.Value.Equals("?", StringComparison.Ordinal))
         {
             return other;
         }
@@ -190,7 +191,7 @@ public readonly struct QueryString : IEquatable<QueryString>
         }
 
         // ?name1=value1 Add ?name2=value2 returns ?name1=value1&name2=value2
-        return new QueryString(string.Concat(Value, "&", other.Value.AsSpan(1)));
+        return new QueryString(string.Concat(this.Value, "&", other.Value.AsSpan(1)));
     }
 
     /// <summary>
@@ -204,12 +205,12 @@ public readonly struct QueryString : IEquatable<QueryString>
     {
         ArgumentNullException.ThrowIfNull(name);
 
-        if (!HasValue || Value.Equals("?", StringComparison.Ordinal))
+        if (!this.HasValue || this.Value.Equals("?", StringComparison.Ordinal))
         {
             return Create(name, value);
         }
 
-        var builder = new StringBuilder(Value);
+        StringBuilder? builder = new StringBuilder(this.Value);
         AppendKeyValuePair(builder, name, value, first: false);
         return new QueryString(builder.ToString());
     }
@@ -221,11 +222,11 @@ public readonly struct QueryString : IEquatable<QueryString>
     /// <returns><see langword="true"/> if the query strings are equal.</returns>
     public bool Equals(QueryString other)
     {
-        if (!HasValue && !other.HasValue)
+        if (!this.HasValue && !other.HasValue)
         {
             return true;
         }
-        return string.Equals(Value, other.Value, StringComparison.Ordinal);
+        return string.Equals(this.Value, other.Value, StringComparison.Ordinal);
     }
 
     /// <summary>
@@ -237,9 +238,9 @@ public readonly struct QueryString : IEquatable<QueryString>
     {
         if (ReferenceEquals(null, obj))
         {
-            return !HasValue;
+            return !this.HasValue;
         }
-        return obj is QueryString && Equals((QueryString)obj);
+        return obj is QueryString && this.Equals((QueryString)obj);
     }
 
     /// <summary>
@@ -248,7 +249,7 @@ public readonly struct QueryString : IEquatable<QueryString>
     /// <returns>The hash code as an <see cref="int"/>.</returns>
     public override int GetHashCode()
     {
-        return (HasValue ? Value.GetHashCode() : 0);
+        return (this.HasValue ? this.Value.GetHashCode() : 0);
     }
 
     /// <summary>

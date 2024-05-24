@@ -46,7 +46,8 @@ public readonly struct PathString : IEquatable<PathString>
         {
             throw new ArgumentException("The path must start with a slash.", nameof(value));
         }
-        Value = value;
+
+		this.Value = value;
     }
 
     /// <summary>
@@ -60,7 +61,7 @@ public readonly struct PathString : IEquatable<PathString>
     [MemberNotNullWhen(true, nameof(Value))]
     public bool HasValue
     {
-        get { return !string.IsNullOrEmpty(Value); }
+        get { return !string.IsNullOrEmpty(this.Value); }
     }
 
     /// <summary>
@@ -69,7 +70,7 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>The escaped path value</returns>
     public override string ToString()
     {
-        return ToUriComponent();
+        return this.ToUriComponent();
     }
 
     /// <summary>
@@ -78,14 +79,14 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>The escaped path value</returns>
     public string ToUriComponent()
     {
-        var value = Value;
+        string? value = this.Value;
 
         if (string.IsNullOrEmpty(value))
         {
             return string.Empty;
         }
 
-        var indexOfInvalidChar = value.AsSpan().IndexOfAnyExcept(s_validPathChars);
+        int indexOfInvalidChar = value.AsSpan().IndexOfAnyExcept(s_validPathChars);
 
         return indexOfInvalidChar < 0
             ? value
@@ -96,13 +97,13 @@ public readonly struct PathString : IEquatable<PathString>
     {
         StringBuilder? buffer = null;
 
-        var start = 0;
-        var count = i;
-        var requiresEscaping = false;
+        int start = 0;
+        int count = i;
+        bool requiresEscaping = false;
 
         while ((uint)i < (uint)value.Length)
         {
-            var isPercentEncodedChar = false;
+            bool isPercentEncodedChar = false;
             if (s_validPathChars.Contains(value[i]) || (isPercentEncodedChar = Uri.IsHexEncoding(value, i)))
             {
                 if (requiresEscaping)
@@ -124,7 +125,7 @@ public readonly struct PathString : IEquatable<PathString>
                 else
                 {
                     // We just saw a character we don't want to escape. It's likely there are more, do a vectorized search.
-                    var charsToSkip = value.AsSpan(i).IndexOfAnyExcept(s_validPathChars);
+                    int charsToSkip = value.AsSpan(i).IndexOfAnyExcept(s_validPathChars);
 
                     if (charsToSkip < 0)
                     {
@@ -192,7 +193,7 @@ public readonly struct PathString : IEquatable<PathString>
         }
         Span<char> pathBuffer = uriComponent.Length <= StackAllocThreshold ? stackalloc char[StackAllocThreshold] : new char[uriComponent.Length];
         uriComponent.CopyTo(pathBuffer);
-        var length = UrlDecoder.DecodeInPlace(pathBuffer.Slice(position, uriComponent.Length - position));
+        int length = UrlDecoder.DecodeInPlace(pathBuffer.Slice(position, uriComponent.Length - position));
         pathBuffer = pathBuffer.Slice(0, position + length);
         return new PathString(pathBuffer.ToString());
     }
@@ -205,10 +206,10 @@ public readonly struct PathString : IEquatable<PathString>
     public static PathString FromUriComponent(Uri uri)
     {
         ArgumentNullException.ThrowIfNull(uri);
-        var uriComponent = uri.GetComponents(UriComponents.Path, UriFormat.UriEscaped);
+        string? uriComponent = uri.GetComponents(UriComponents.Path, UriFormat.UriEscaped);
         Span<char> pathBuffer = uriComponent.Length < StackAllocThreshold ? stackalloc char[StackAllocThreshold] : new char[uriComponent.Length + 1];
         pathBuffer[0] = '/';
-        var length = UrlDecoder.DecodeRequestLine(uriComponent.AsSpan(), pathBuffer.Slice(1));
+        int length = UrlDecoder.DecodeRequestLine(uriComponent.AsSpan(), pathBuffer.Slice(1));
         pathBuffer = pathBuffer.Slice(0, length + 1);
         return new PathString(pathBuffer.ToString());
     }
@@ -220,7 +221,7 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
     public bool StartsWithSegments(PathString other)
     {
-        return StartsWithSegments(other, StringComparison.OrdinalIgnoreCase);
+        return this.StartsWithSegments(other, StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
@@ -232,8 +233,8 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
     public bool StartsWithSegments(PathString other, StringComparison comparisonType)
     {
-        var value1 = Value ?? string.Empty;
-        var value2 = other.Value ?? string.Empty;
+        string? value1 = this.Value ?? string.Empty;
+        string? value2 = other.Value ?? string.Empty;
         if (value1.StartsWith(value2, comparisonType))
         {
             return value1.Length == value2.Length || value1[value2.Length] == '/';
@@ -250,7 +251,7 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
     public bool StartsWithSegments(PathString other, out PathString remaining)
     {
-        return StartsWithSegments(other, StringComparison.OrdinalIgnoreCase, out remaining);
+        return this.StartsWithSegments(other, StringComparison.OrdinalIgnoreCase, out remaining);
     }
 
     /// <summary>
@@ -263,8 +264,8 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
     public bool StartsWithSegments(PathString other, StringComparison comparisonType, out PathString remaining)
     {
-        var value1 = Value ?? string.Empty;
-        var value2 = other.Value ?? string.Empty;
+        string? value1 = this.Value ?? string.Empty;
+        string? value2 = other.Value ?? string.Empty;
         if (value1.StartsWith(value2, comparisonType))
         {
             if (value1.Length == value2.Length || value1[value2.Length] == '/')
@@ -287,7 +288,7 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
     public bool StartsWithSegments(PathString other, out PathString matched, out PathString remaining)
     {
-        return StartsWithSegments(other, StringComparison.OrdinalIgnoreCase, out matched, out remaining);
+        return this.StartsWithSegments(other, StringComparison.OrdinalIgnoreCase, out matched, out remaining);
     }
 
     /// <summary>
@@ -301,8 +302,8 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
     public bool StartsWithSegments(PathString other, StringComparison comparisonType, out PathString matched, out PathString remaining)
     {
-        var value1 = Value ?? string.Empty;
-        var value2 = other.Value ?? string.Empty;
+        string? value1 = this.Value ?? string.Empty;
+        string? value2 = other.Value ?? string.Empty;
         if (value1.StartsWith(value2, comparisonType))
         {
             if (value1.Length == value2.Length || value1[value2.Length] == '/')
@@ -323,17 +324,16 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>The combined PathString value</returns>
     public PathString Add(PathString other)
     {
-        if (HasValue &&
-            other.HasValue &&
-            Value[^1] == '/')
+        if (this.HasValue &&
+            other.HasValue && this.Value[^1] == '/')
         {
             // If the path string has a trailing slash and the other string has a leading slash, we need
             // to trim one of them.
-            var combined = string.Concat(Value.AsSpan(), other.Value.AsSpan(1));
+            string? combined = string.Concat(this.Value.AsSpan(), other.Value.AsSpan(1));
             return new PathString(combined);
         }
 
-        return new PathString(Value + other.Value);
+        return new PathString(this.Value + other.Value);
     }
 
     /// <summary>
@@ -342,7 +342,7 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>The joined URI formatted string value</returns>
     public string Add(QueryString other)
     {
-        return ToUriComponent() + other.ToUriComponent();
+        return this.ToUriComponent() + other.ToUriComponent();
     }
 
     /// <summary>
@@ -352,7 +352,7 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>True if both PathString values are equal</returns>
     public bool Equals(PathString other)
     {
-        return Equals(other, StringComparison.OrdinalIgnoreCase);
+        return this.Equals(other, StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
@@ -363,11 +363,11 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>True if both PathString values are equal</returns>
     public bool Equals(PathString other, StringComparison comparisonType)
     {
-        if (!HasValue && !other.HasValue)
+        if (!this.HasValue && !other.HasValue)
         {
             return true;
         }
-        return string.Equals(Value, other.Value, comparisonType);
+        return string.Equals(this.Value, other.Value, comparisonType);
     }
 
     /// <summary>
@@ -379,9 +379,9 @@ public readonly struct PathString : IEquatable<PathString>
     {
         if (obj is null)
         {
-            return !HasValue;
+            return !this.HasValue;
         }
-        return obj is PathString pathString && Equals(pathString);
+        return obj is PathString pathString && this.Equals(pathString);
     }
 
     /// <summary>
@@ -390,7 +390,7 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>The hash code</returns>
     public override int GetHashCode()
     {
-        return (HasValue ? StringComparer.OrdinalIgnoreCase.GetHashCode(Value) : 0);
+        return (this.HasValue ? StringComparer.OrdinalIgnoreCase.GetHashCode(this.Value) : 0);
     }
 
     /// <summary>
