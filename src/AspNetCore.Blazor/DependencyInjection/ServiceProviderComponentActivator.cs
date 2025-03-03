@@ -4,10 +4,13 @@
     using JetBrains.Annotations;
     using Microsoft.AspNetCore.Components;
 
-    /// <summary>
+	/// <summary>
 	///     This <see cref="IComponentActivator" /> implementation enables
 	///     constructor injection in components.
 	/// </summary>
+#if NET8_0
+	[Obsolete("Blazor supports ctor injection since .NET 9")]
+#endif
 	[UsedImplicitly]
 	internal sealed class ServiceProviderComponentActivator : IComponentActivator
 	{
