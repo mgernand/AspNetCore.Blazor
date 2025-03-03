@@ -23,6 +23,9 @@
 		/// </summary>
 		/// <param name="services"></param>
 		/// <returns></returns>
+#if NET8_0
+		[Obsolete("Blazor supports ctor injection since .NET 9")]
+#endif
 		public static IServiceCollection AddComponentActivator(this IServiceCollection services)
 		{
 			if(services is null)
