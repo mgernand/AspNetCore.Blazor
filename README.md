@@ -2,7 +2,7 @@
 
 A library that provides some extensions for ASP.NET Core Blazor.
 
-1. Enables contructor injection for components.
+## This repository was moved to https://codeberg.org/mgernand/AspNetCore.Blazor
 
 ## Usage
 
